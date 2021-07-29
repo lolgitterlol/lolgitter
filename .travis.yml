@@ -1,32 +1,15 @@
-sudo: required
-jobs:
-  include:
-    - os: osx
-      language: node_js
-      node_js:
-        - "6.16"
+language: generic
 
+before_deploy:
+  - git config --local user.name "srikargitreddy"
+  - git config --local user.email "srikarreddygit@gmail.com"
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
 
-before_install:
-  - npm i
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  skip_cleanup: true
 
-script:
-#  - npm test
-  - git config --local user.name "rweigel"
-  - git config --local user.email "rweigel@gmu.edu"
-  - export GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN
-  - git checkout release; git merge master
-  - cd pkg; make release GITHUB_OAUTH_TOKEN=$(GITHUB_OAUTH_TOKEN)
-
-# Trigger build only for these branches
-branches:
-  only:
-  - master
-
-notifications:
-  email:
-    recipients:
-      - rweigel@gmu.edu
-      - ksreddy9945@gmail.com
-  on_success: change
-  on_failure: always
+after_deploy:
+  - echo $TRAVIS_TAG
