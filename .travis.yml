@@ -1,9 +1,10 @@
 language: generic
-
+##
 before_deploy:
   - git config --local user.name "srikargitreddy"
   - git config --local user.email "srikarreddygit@gmail.com"
   - npm verison patch -no-git-tag-version
+  - make update VERSION=`node -p "require('./package.json').version"`
   - export TRAVIS_TAG=`node -p "require('./package.json').version"`
   - git tag $TRAVIS_TAG
 
@@ -11,6 +12,7 @@ deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   skip_cleanup: true
+  file: pkg/dist/*
 
 after_deploy:
   - echo $TRAVIS_TAG
