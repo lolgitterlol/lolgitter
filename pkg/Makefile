@@ -12,7 +12,7 @@ NODED=https://nodejs.org/dist/latest-v6.x
 # Do not modify following line. Version set by call to
 #   npm run update
 # which uses version in package.json
-VERSION=v1.0.0
+VERSION=1.2.1
 
 # To get other OS-X versions, see
 # https://developer.apple.com/forums/thread/111322
@@ -33,8 +33,8 @@ endif
 
 # When NodeJS and Python binaries do not need to be updated.
 update:
-	sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md	
-	sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md	
+	sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
+	sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
 	sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
 	sed -E -i '' 's/VERSION="v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/VERSION="$(VERSION)"/g' ../server.js
 	make packages
@@ -42,8 +42,8 @@ update:
 
 packages:
 	make package OS=darwin-x64 VERSION=$(VERSION)
-	#make package OS=linux-x64 VERSION=$(VERSION)
-	#make package OS=linux-armv7l VERSION=$(VERSION)
+	make package OS=linux-x64 VERSION=$(VERSION)
+	make package OS=linux-armv7l VERSION=$(VERSION)
 
 GITHUB=https://github.com/hapi-server/server-nodejs/releases/download
 package:
@@ -134,7 +134,7 @@ clean:
 
 
 # Did this on High Sierra
-darwin-x64: 
+darwin-x64:
 	make node0 OS=darwin-x64
 	make package OS=darwin-x64
 
