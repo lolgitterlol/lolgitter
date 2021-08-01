@@ -6,7 +6,7 @@ before_deploy:
   - npm verison patch -no-git-tag-version
   - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
   - export TRAVIS_TAG=`node -p "require('./package.json').version"`
-  - git tag `node -p "require('./package.json').version"`
+  - git tag `node -p "require('../package.json').version"`
 
 deploy:
   provider: releases
