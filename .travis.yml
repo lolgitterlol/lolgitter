@@ -6,6 +6,7 @@ before_deploy:
   - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
   - export TRAVIS_TAG=`node -p "require('./package.json').version"`
   - git tag `node -p "require('../package.json').version"`
+  - npm run test-packages
 
 deploy:
   provider: releases
@@ -13,5 +14,3 @@ deploy:
   file_glob: true
   file: dist/*
   skip_cleanup: true
-  script:
-    - npm run test-packages
