@@ -33,6 +33,7 @@ endif
 
 # When NodeJS and Python binaries do not need to be updated.
 update:
+	cd pkg
 	sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
 	sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
 	sed -E -i '' 's/VERSION="v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/VERSION="$(VERSION)"/g' ../server.js
@@ -95,7 +96,7 @@ docker:
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
-	cd pkg && make update VERSION=$(VERSION);
+	make update VERSION=$(VERSION);
 	npm install release-it;
 	cd .. && GITHUB_TOKEN=$(GITHUB_OAUTH_TOKEN) && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
