@@ -7,13 +7,16 @@ before_deploy:
   - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
   - export TRAVIS_TAG=`node -p "require('./package.json').version"`
   - git tag `node -p "require('../package.json').version"`
+  - pwd
 
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
-  skip_cleanup: true
   file_glob: true
-  file: pkg/dist/*
+  file: pkg/**/*
+  skip_cleanup: true
+  on:
+    tags: true
 
 after_deploy:
   - echo $TRAVIS_TAG
