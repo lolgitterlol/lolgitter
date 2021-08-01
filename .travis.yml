@@ -1,13 +1,11 @@
 language: generic
-####Commit11
 before_deploy:
   - git config --local user.name "srikargitreddy"
   - git config --local user.email "srikarreddygit@gmail.com"
-  - npm verison patch -no-git-tag-version
+  #- npm verison patch -no-git-tag-version
   - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
   - export TRAVIS_TAG=`node -p "require('./package.json').version"`
   - git tag `node -p "require('../package.json').version"`
-  - pwd
 
 deploy:
   provider: releases
@@ -16,5 +14,5 @@ deploy:
   file: dist/*
   skip_cleanup: true
 
-after_deploy:
-  - echo $TRAVIS_TAG
+script:
+  - npm run test-packages
