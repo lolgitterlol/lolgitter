@@ -13,6 +13,5 @@ deploy:
   file_glob: true
   file: dist/*
   skip_cleanup: true
-
-script:
-  - npm run test-packages
+  script:
+    - npm run test-packages
