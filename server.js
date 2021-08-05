@@ -1,3 +1,4 @@
+//
 const fs   = require('fs');
 if (!fs.existsSync(__dirname + "/node_modules")) {
 	console.log("Dependencies not found. Execute npm install before starting server.");
@@ -148,7 +149,7 @@ if (HTTPS === false) {
 		// Genererate key and cert file
 
 		let com = 'sh \"' + __dirname + '/ssl/gen_ssl.sh' + '\"';
-		
+
 		// execSync requires a callback. Replaced it with spawnSync.
 		let child;
 		try {
@@ -172,7 +173,7 @@ if (HTTPS === false) {
 				key:  fs.readFileSync(require("path").resolve(__dirname, "./ssl/key.pem")),
 				cert: fs.readFileSync(require("path").resolve(__dirname, "./ssl/cert.pem"))
 			};
-			
+
 			server = require("https").createServer(options, app);
 
 		} else {
@@ -364,7 +365,7 @@ function main() {
 
 	function startupMessages(url_prefix){
 		console.log(ds() + clc.blue("Listening on port " + argv.port));
-	
+
 		let url = url_prefix + argv.port;
 		console.log(ds() + "HAPI server list is at");
 		console.log(ds() + "  " + url);
@@ -372,11 +373,11 @@ function main() {
 		for (var i = 0;i < CATALOGS.length;i++) {
 			console.log(ds() + "  " + url + "/" + PREFIXES[i] + "/hapi");
 		}
-	
+
 		console.log(ds() + "To open a browser at " + url + ", use the --open option.");
 		console.log(ds() + "To run test URLs and exit, use the --test option.");
 		console.log(ds() + "To run command-line verification tests and exit, use the --verify option.");
-	
+
 		if (OPEN) {
 			// Open browser window
 			var start = (process.platform == 'darwin'
@@ -384,7 +385,7 @@ function main() {
 							? 'start': 'xdg-open');
 			require('child_process').exec(start + ' ' + url);
 		}
-	
+
 		if (TEST) {
 			// Exits with signal 0 or 1
 			test.urls(CATALOGS, PREFIXES, url, TEST);
@@ -400,9 +401,9 @@ function main() {
 				verify(url + "/" + PREFIXES[0] + "/hapi");
 			}
 		}
-	
+
 	}
-	
+
 	// TODO: Server startup should be a callback to apiInit.
 	if (HTTPS) {
 		// In-case of HTTPS, server.listen is used. app.listen() can only listen to HTTP requests
@@ -417,7 +418,7 @@ function main() {
 			startupMessages(url_prefix);
 		});
 	}
-	
+
 }
 
 function apiInit(CATALOGS, PREFIXES, i) {
@@ -493,9 +494,9 @@ function apiInit(CATALOGS, PREFIXES, i) {
 				landingFile = file2;
 			} else {
 				// Serve directory listing
-				console.log(ds() 
+				console.log(ds()
 							+ "Did not find index.{htm,html}. "
-				  			+ "In " + landing_path 
+				  			+ "In " + landing_path
 				  			+ ". Allowing directory listing.");
 				app.use(PREFIX + '/hapi', serveIndex(landing_path));
 			}
@@ -1145,7 +1146,7 @@ function csvTo(records,first,last,header,include) {
 			}
 		}
 		if (truncated > 0) {
-			console.log(ds() + clc.red((truncated) 
+			console.log(ds() + clc.red((truncated)
 						+ " strings were truncated because they"
 						+ " were longer than length given in metadata"));
 		}
