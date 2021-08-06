@@ -37,7 +37,7 @@ jobs:
         - git config --local user.email "gitsrikarreddy@gmail.com"
         - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
         - export TRAVIS_TAG=`node -p "require('../package.json').version"`
-        - git tag `node -p "require('../package.json').version"` -m "[skip travis]"
+        - git tag `node -p "require('../package.json').version"`
 
       deploy:
         provider: releases
