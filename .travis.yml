@@ -42,10 +42,12 @@ jobs:
       deploy:
         provider: releases
         on:
-          branch: releases
+          branch: deploy
         api_key: $GITHUB_OAUTH_TOKEN
         file_glob: true
         file: dist/*
+        skip_cleanup: true
+
     - stage: test-osx
       os: osx
       language: generic
