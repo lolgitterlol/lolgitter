@@ -48,23 +48,32 @@ jobs:
         file: dist/*
         skip_cleanup: true
 
-    - stage: test-osx
+    - stage: darwin-x64
       os: osx
       language: generic
       before_install: skip
       branches:
         only:
           - deploy
-      script: curl -O http://github/hapi-server-osx-`node -p "require('./package.json').version"`.tgz; tar xvf hapi-server-osx-`node -p "require('./package.json').version"`.tgz; cd hapi-server-osx; ../hapi-server test
-    - stage: test-linux
+      script: curl -O https://github.com/gitsrikarreddy/server-node-1/releases/download/`node -p "require('./package.json').version"`/hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; tar zxvf hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; cd hapi-server-`node -p "require('./package.json').version"`; ./hapi-server test
+    - stage: linux-armv7l
       os: linux
       language: generic
       before_install: skip
-
       branches:
         only:
           - deploy
-      script: curl -O http://github/hapi-server-linux-`node -p "require('./package.json').version"`.tgz; tar xvf hapi-server-linux-`node -p "require('./package.json').version"`.tgz; cd hapi-server-linux; ../hapi-server test
+      script: curl -O https://github.com/gitsrikarreddy/server-node-1/releases/download/`node -p "require('./package.json').version"`/hapi-server-`node -p "require('./package.json').version"`-linux-armv7l.tgz; tar zxvf hapi-server-`node -p "require('./package.json').version"`-linux-armv7l.tgz; cd hapi-server-`node -p "require('./package.json').version"`; ./hapi-server test
+
+    - stage: linux-x64
+      os: linux
+      language: generic
+      before_install: skip
+      branches:
+        only:
+          - deploy
+      script: curl -O https://github.com/gitsrikarreddy/server-node-1/releases/download/`node -p "require('./package.json').version"`/hapi-server-`node -p "require('./package.json').version"`-linux-x64.tgz; tar zxvf hapi-server-`node -p "require('./package.json').version"`-linux-x64.tgz; cd hapi-server-`node -p "require('./package.json').version"`; ./hapi-server test
+
 
 before_install:
   - npm i
