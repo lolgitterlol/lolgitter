@@ -53,7 +53,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O http://github/hapi-server-osx-`node -p "require('./package.json').version"`.tgz; tar xvf hapi-server-osx-`node -p "require('./package.json').version"`.tgz; cd hapi-server-osx; ./hapi-server test
+      script: curl -O http://github/hapi-server-osx-`node -p "require('../package.json').version"`.tgz; tar xvf hapi-server-osx-`node -p "require('../package.json').version"`.tgz; cd hapi-server-osx; ../hapi-server test
     - stage: test-linux
       os: linux
       language: generic
@@ -62,7 +62,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O http://github/hapi-server-linux-`node -p "require('./package.json').version"`.tgz; tar xvf hapi-server-linux-`node -p "require('./package.json').version"`.tgz; cd hapi-server-linux; ./hapi-server test
+      script: curl -O http://github/hapi-server-linux-`node -p "require('../package.json').version"`.tgz; tar xvf hapi-server-linux-`node -p "require('../package.json').version"`.tgz; cd hapi-server-linux; ../hapi-server test
 
 before_install:
   - npm i
