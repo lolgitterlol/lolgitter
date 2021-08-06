@@ -43,7 +43,7 @@ jobs:
         provider: releases
         on:
           branch: releases
-        token: $GITHUB_OAUTH_TOKEN
+        api_key: $GITHUB_OAUTH_TOKEN
         file_glob: true
         file: dist/*
     - stage: test-osx
