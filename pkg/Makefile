@@ -1,4 +1,4 @@
-# To create a release
+# To create a release//
 #   1. modify version on line 3 of package.json
 #   2. npm run package 			# Creates pkg/*.tgz files with needed binaries from previous release
 #   3. npm run test-packages	# Tests packages on locally running VMs
