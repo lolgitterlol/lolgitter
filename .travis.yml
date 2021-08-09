@@ -36,8 +36,8 @@ jobs:
         - git config --local user.name "srikar45"
         - git config --local user.email "srikarreddygit@gmail.com"
         - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
-        - export TRAVIS_TAG=`node -p "require('./package.json').version"`
-        - git tag `node -p "require('../package.json').version"` -m "[skip travis]"
+        - export TRAVIS_TAG=`node -p "require('../package.json').version"`
+        - git tag `node -p "require('../package.json').version"`"
 
       deploy:
         provider: releases
@@ -46,14 +46,7 @@ jobs:
         token: $GITHUB_OAUTH_TOKEN
         file_glob: true
         file: dist/*
-    - stage: test-osx
-      os: osx
-      language: generic
-      before_install: skip
-      branches:
-        only:
-          - deploy
-      script: curl -O http://github/hapi-server-osx-`node -p "require('../package.json').version"`.tgz; tar xvf hapi-server-osx-`node -p "require('../package.json').version"`.tgz; cd hapi-server-osx; ./hapi-server test
+
     - stage: test-linux
       os: linux
       language: generic
@@ -62,7 +55,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O http://github/hapi-server-linux-`node -p "require('../package.json').version"`.tgz; tar xvf hapi-server-linux-`node -p "require('../package.json').version"`.tgz; cd hapi-server-linux; ./hapi-server test
+      script: curl -O https://github.com/gitsrikarreddy/server-node-1/releases/download/`node -p "require('./package.json').version"`/hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; tar zxvf hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; cd hapi-server-`node -p "require('./package.json').version"`; ./hapi-server test
 
 before_install:
   - npm i
