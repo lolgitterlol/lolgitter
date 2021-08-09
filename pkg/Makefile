@@ -12,7 +12,7 @@ NODED=https://nodejs.org/dist/latest-v6.x
 # Do not modify following line. Version set by call to
 #   npm run update
 # which uses version in package.json
-VERSION=1.2.1
+VERSION=`node -p "require('../package.json').version"`
 
 # To get other OS-X versions, see
 # https://developer.apple.com/forums/thread/111322
