@@ -33,7 +33,7 @@ jobs:
       before_deploy:
         - git config --local user.name "gitsrikarreddy"
         - git config --local user.email "gitsrikarreddy@gmail.com"
-        - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
+        - cd pkg && make update
         - export TRAVIS_TAG=`node -p "require('../package.json').version"`
         - git tag `node -p "require('../package.json').version"`
 
