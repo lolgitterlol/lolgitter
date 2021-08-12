@@ -69,7 +69,7 @@ endif
 files:
 	rm -rf dist/hapi-server-$(VERSION)
 	mkdir -p dist/hapi-server-$(VERSION)
-	rsync -aq \
+	rsync -a \
 		--exclude metadata/CAIO \
 		--exclude pkg \
 		--exclude .git \
