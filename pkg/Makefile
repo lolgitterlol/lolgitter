@@ -69,23 +69,26 @@ endif
 files:
 	rm -rf dist/hapi-server-$(VERSION)
 	mkdir -p dist/hapi-server-$(VERSION)
+	cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
 	rsync -a \
 		--exclude metadata/CAIO \
 		--exclude pkg \
 		--exclude .git \
 		--exclude public/data/QinDenton \
 		../ dist/hapi-server-$(VERSION)
+	cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
 	rm -rf dist/hapi-server-$(VERSION)/package*
 	rm -rf dist/hapi-server-$(VERSION)/.git*
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
+  cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
 
 targz:
-	cd dist; tar zcf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
+	cd dist; ls -l ;tar zcf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
 
 docker:
 	- docker stop hapi-server
