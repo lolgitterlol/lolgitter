@@ -2,7 +2,8 @@ language: generic
 os: linux
 dist: xenial
 env:
-  - npm_ver= `node -p "require('../package.json').version"`
+  global:
+    - npm_ver=`node -p "require('../package.json').version"`
 jobs:
   include:
     - stage: deploy
