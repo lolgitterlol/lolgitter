@@ -1,6 +1,8 @@
 language: generic
 os: linux
 dist: xenial
+env:
+  - npm_ver= `node -p "require('../package.json').version"`
 jobs:
   include:
     - stage: deploy
@@ -17,8 +19,8 @@ jobs:
         - git config --local user.email "gitsrikarreddy@gmail.com"
         - npm i
         - cd pkg && make update
-        - export TRAVIS_TAG=`node -p "require('../package.json').version"`
-        - git tag `node -p "require('../package.json').version"` -m "[ci skip]"
+        - export TRAVIS_TAG=$npm_ver
+        - git tag $npm_ver -m "[ci skip]"
 
       deploy:
         provider: releases
@@ -28,8 +30,6 @@ jobs:
         file_glob: true
         file: dist/*
         skip_cleanup: true
-        on:
-          tags: true
 
     - stage: darwin-x64
       os: osx
