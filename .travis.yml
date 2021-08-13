@@ -3,7 +3,7 @@ os: linux
 dist: xenial
 env:
   global:
-    - npm_ver=`node -p "require('../package.json').version"`
+    - npm_ver=`node -p "require('./package.json').version"`
 jobs:
   include:
     - stage: deploy
