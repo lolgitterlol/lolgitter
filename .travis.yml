@@ -33,8 +33,6 @@ jobs:
         skip_cleanup: true
 
     - stage: darwin-x64
-      on:
-        tags: true
       os: osx
       language: generic
       before_install: skip
