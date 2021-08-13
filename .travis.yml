@@ -1,9 +1,6 @@
 language: generic
 os: linux
 dist: xenial
-env:
-  global:
-    - npm_ver=`node -p "require('./package.json').version"`
 jobs:
   include:
     - stage: deploy
@@ -20,8 +17,8 @@ jobs:
         - git config --local user.email "gitsrikarreddy@gmail.com"
         - npm i
         - cd pkg && make update
-        - export TRAVIS_TAG=$npm_ver
-        - git tag $npm_ver -m "[ci skip]"
+        - export TRAVIS_TAG=`node -p "require('../package.json').version"`
+        - git tag `node -p "require('../package.json').version"`
 
       deploy:
         provider: releases
@@ -39,7 +36,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O -L https://github.com/ksrgit45/server-node-2/releases/download/$npm_ver/hapi-server-$npm_ver-darwin-x64.tgz; tar zxvf hapi-server-$npm_ver-darwin-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
+      script: curl -O -L https://github.com/ksrgit45/server-node-2/releases/download/`node -p "require('./package.json').version"`/hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; tar zxvf hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; cd hapi-server-`node -p "require('./package.json').version"`; ./hapi-server test;
 
 
 before_install:
