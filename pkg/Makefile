@@ -82,7 +82,7 @@ files:
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
-  cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
+	cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
