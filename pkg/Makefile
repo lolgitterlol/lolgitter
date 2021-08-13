@@ -70,7 +70,6 @@ files:
 	rm -rf dist/hapi-server-$(VERSION)
 	mkdir -p dist/hapi-server-$(VERSION)
 	pwd
-	cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
 	rsync -a \
 		--exclude metadata/CAIO \
 		--exclude pkg \
