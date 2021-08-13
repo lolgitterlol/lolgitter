@@ -18,7 +18,7 @@ jobs:
         - npm i
         - cd pkg && make update
         - export TRAVIS_TAG=`node -p "require('../package.json').version"`
-        - git tag `node -p "require('../package.json').version"`
+        - git tag `node -p "require('../package.json').version"` -m "[skip ci]"
 
       deploy:
         provider: releases
