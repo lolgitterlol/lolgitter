@@ -23,7 +23,7 @@ jobs:
       node_js: "6.16"
       branches:
         only: master
-        
+
     - stage: deploy
       os: osx
       language: generic
@@ -34,8 +34,8 @@ jobs:
           deploy
 
       before_deploy:
-        - git config --local user.name "gitsrikarreddy"
-        - git config --local user.email "gitsrikarreddy@gmail.com"
+        - git config --local user.name "gitgitksr"
+        - git config --local user.email "gitgitksr@gmail.com"
         - npm i
         - cd pkg && make update
         - export TRAVIS_TAG=$npm_ver
