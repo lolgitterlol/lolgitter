@@ -6,6 +6,24 @@ env:
     - npm_ver=`node -p "require('./package.json').version"`
 jobs:
   include:
+    - os: linux
+      language: node_js
+      node_js: "6.16"
+      branches:
+         only: master
+
+    - os: windows
+      language: node_js
+      node_js: "8.11.3"
+      branches:
+        only: master
+
+    - os: osx
+      language: node_js
+      node_js: "6.16"
+      branches:
+        only: master
+        
     - stage: deploy
       os: osx
       language: generic
