@@ -61,6 +61,8 @@ jobs:
 
     - stage: linux-armv7l
       os: osx
+      arch: arm64
+      env: OS=arm32_linux
       language: generic
       before_install: skip
       branches:
@@ -69,7 +71,7 @@ jobs:
       script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-linux-armv7l.tgz; tar zxvf hapi-server-$npm_ver-linux-armv7l.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
 
     - stage: linux-x64
-      os: osx
+      os: linux
       language: generic
       before_install: skip
       branches:
