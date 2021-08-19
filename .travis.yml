@@ -60,7 +60,7 @@ jobs:
       script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-darwin-x64.tgz; tar zxvf hapi-server-$npm_ver-darwin-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
 
     - stage: linux-armv7l
-      os: osx
+      os: linux
       arch: arm64
       env: OS=arm32_linux
       language: generic
