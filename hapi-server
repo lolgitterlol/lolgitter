@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Note that code can only test major version.
+# Note that code can only test major version..
 # Also note that assuming posix shell.
 versionmin="6"
 
