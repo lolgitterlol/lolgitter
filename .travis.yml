@@ -6,24 +6,6 @@ env:
     - npm_ver=`node -p "require('./package.json').version"`
 jobs:
   include:
-    - os: linux
-      language: node_js
-      node_js: "6.16"
-      branches:
-         only: master
-
-    - os: windows
-      language: node_js
-      node_js: "8.11.3"
-      branches:
-        only: master
-
-    - os: osx
-      language: node_js
-      node_js: "6.16"
-      branches:
-        only: master
-
     - stage: deploy
       os: osx
       language: generic
@@ -50,18 +32,8 @@ jobs:
         file: dist/*
         skip_cleanup: true
 
-    - stage: darwin-x64
-      os: osx
-      language: generic
-      before_install: skip
-      branches:
-        only:
-          - deploy
-      script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-darwin-x64.tgz; tar zxvf hapi-server-$npm_ver-darwin-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
-
     - stage: linux-armv7l
       os: linux
-      arch: arm64
       env: OS=arm32_linux
       language: generic
       before_install: skip
@@ -69,16 +41,6 @@ jobs:
         only:
           - deploy
       script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-linux-armv7l.tgz; tar zxvf hapi-server-$npm_ver-linux-armv7l.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
-
-    - stage: linux-x64
-      os: linux
-      language: generic
-      before_install: skip
-      branches:
-        only:
-          - deploy
-      script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-linux-x64.tgz; tar zxvf hapi-server-$npm_ver-linux-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
-
 before_install:
   - npm i
 
