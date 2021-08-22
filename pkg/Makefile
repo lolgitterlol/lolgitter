@@ -43,6 +43,7 @@ packages:
 	make package OS=darwin-x64 VERSION=$(VERSION)
 	make package OS=linux-x64 VERSION=$(VERSION)
 	make package OS=linux-armv7l VERSION=$(VERSION)
+	make package OS=win-x64 VERSION=$(VERSION)
 
 GITHUB=https://github.com/hapi-server/server-nodejs/releases/download
 package:
@@ -50,6 +51,14 @@ package:
 	#Do this if compiled binaries change.
 	#cp bin/node-$(NODEV)-$(OS) dist/hapi-server-$(VERSION)/bin/node
 ifeq ($(OS),win-x64)
+	# cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-$(OS).zip
+	# cd /tmp; tar zxf hapi-server-v0.9.5-$(OS).zip \
+	# curl https://nodejs.org/dist/latest-v8.x/win-x64/node.exe --output node.exe
+	# mv /tmp/node.exe dist/hapi-server-$(VERSION)/bin
+	# mv /tmp/hapi-server-v0.9.5/bin/python dist/hapi-server-$(VERSION)/bin
+	# rm -f /tmp/hapi-server-v0.9.5-$(OS).tgz
+
+
 	# Not tested
 else
 	# Use comiled binaries from a previous release
