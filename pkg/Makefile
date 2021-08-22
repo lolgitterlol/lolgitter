@@ -51,13 +51,12 @@ package:
 	#Do this if compiled binaries change.
 	#cp bin/node-$(NODEV)-$(OS) dist/hapi-server-$(VERSION)/bin/node
 ifeq ($(OS),win-x64)
-	# cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-$(OS).zip
-	# cd /tmp; tar zxf hapi-server-v0.9.5-$(OS).zip \
-	# curl https://nodejs.org/dist/latest-v8.x/win-x64/node.exe --output node.exe
-	# mv /tmp/node.exe dist/hapi-server-$(VERSION)/bin
-	# mv /tmp/hapi-server-v0.9.5/bin/python dist/hapi-server-$(VERSION)/bin
-	# rm -f /tmp/hapi-server-v0.9.5-$(OS).tgz
-
+	cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-linux-x64.tgz
+	cd /tmp; tar zxf hapi-server-v0.9.5-linux-x64.tgz
+	cd /tmp; curl https://nodejs.org/dist/latest-v8.x/win-x64/node.exe --output node.exe
+	mv /tmp/node.exe dist/hapi-server-$(VERSION)/bin
+	mv /tmp/hapi-server-v0.9.5/bin/python dist/hapi-server-$(VERSION)/bin
+	rm -f /tmp/hapi-server-v0.9.5-linux-x64.tgz
 
 	# Not tested
 else
