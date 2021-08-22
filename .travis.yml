@@ -34,7 +34,7 @@ jobs:
 
     - stage: linux-armv7l
       os: linux
-      arch: arm64
+      arch: arm32
       env: OS=arm32_linux
       language: generic
       before_install: skip
