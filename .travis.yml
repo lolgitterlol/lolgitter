@@ -43,7 +43,6 @@ jobs:
 
     - stage: win-x64
       os: windows
-      language: generic
       before_install: skip
       branches:
         only:
