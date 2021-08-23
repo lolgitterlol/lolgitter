@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Note that code can only test major version..
-# Also note that assuming posix shell...
+# Also note that assuming posix shell....
 versionmin="6"
 
 # From https://unix.stackexchange.com/a/76518
