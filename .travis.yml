@@ -43,6 +43,7 @@ jobs:
 
     - stage: win-x64
       os: windows
+      language: node_js
       node_js: "8.11.3"
       before_install: skip
       branches:
