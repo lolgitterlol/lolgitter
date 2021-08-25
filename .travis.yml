@@ -39,7 +39,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O -L https://github.com/hapi-server/server-nodejs/releases/download/$npm_ver/hapi-server-$npm_ver-darwin-x64.tgz && tar zxvf hapi-server-$npm_ver-darwin-x64.tgz && cd hapi-server-$npm_ver && ./hapi-server test;
+      script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-darwin-x64.tgz && tar zxvf hapi-server-$npm_ver-darwin-x64.tgz && cd hapi-server-$npm_ver && ./hapi-server test;
 
     - stage: linux-armv7l
       os: osx
@@ -48,7 +48,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O -L https://github.com/hapi-server/server-nodejs/releases/download/$npm_ver/hapi-server-$npm_ver-linux-armv7l.tgz && tar zxvf hapi-server-$npm_ver-linux-armv7l.tgz && cd hapi-server-$npm_ver && ./hapi-server test;
+      script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-linux-armv7l.tgz && tar zxvf hapi-server-$npm_ver-linux-armv7l.tgz && cd hapi-server-$npm_ver && ./hapi-server test;
 
     - stage: linux-x64
       os: osx
@@ -57,7 +57,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O -L https://github.com/hapi-server/server-nodejs/releases/download/$npm_ver/hapi-server-$npm_ver-linux-x64.tgz; tar zxvf hapi-server-$npm_ver-linux-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
+      script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-linux-x64.tgz; tar zxvf hapi-server-$npm_ver-linux-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
 
     - stage: win-x64
       os: windows
@@ -67,7 +67,7 @@ jobs:
       branches:
         only:
           - deploy
-      script: curl -O -L https://github.com/hapi-server/server-nodejs/releases/download/$npm_ver/hapi-server-$npm_ver-win-x64.tgz; tar zxvf hapi-server-$npm_ver-win-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
+      script: curl -O -L https://github.com/gitgitksr/server-node-3/releases/download/$npm_ver/hapi-server-$npm_ver-win-x64.tgz; tar zxvf hapi-server-$npm_ver-win-x64.tgz; cd hapi-server-$npm_ver; ./hapi-server test;
 
 
 before_install:
