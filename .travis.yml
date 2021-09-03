@@ -46,8 +46,8 @@ jobs:
           deploy
 
       before_deploy:
-        - git config --local user.name "gitgitksr"
-        - git config --local user.email "gitgitksr@gmail.com"
+        - git config --local user.name "lolgitterlol"
+        - git config --local user.email "lolgitterlol@gmail.com"
         - npm i
         - npm run package
         - export TRAVIS_TAG=$npm_ver
