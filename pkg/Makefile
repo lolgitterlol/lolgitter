@@ -2,7 +2,7 @@
 #   1. modify version on line 3 of package.json
 #   2. npm run package 			# Creates pkg/*.tgz files with needed binaries from previous release
 #   3. npm run test-packages	# Tests packages on locally running VMs
-#   4. npm run release         	# Tags release on github
+#   4. npm run release         	# Tags release on github..
 
 # If a new version of node or python is needed ...
 #   Need statically compiled node and python. See bottom of Makefile.
