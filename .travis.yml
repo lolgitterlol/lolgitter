@@ -62,6 +62,17 @@ jobs:
         file: pkg/dist/*
         skip_cleanup: true
 
+
+    - stage: darwin-x64
+      if: branch = deploy
+      os: osx
+      language: generic
+      before_install: skip
+      branches:
+        only:
+          - deploy
+      script: curl -O -L https://github.com/lolgitterlol/lolgitter/releases/download/$npm_ver/hapi-server-$npm_ver-darwin-x64.tgz && tar zxf hapi-server-$npm_ver-darwin-x64.tgz && cd hapi-server-$npm_ver && bin/node server.js test/server-test.js --test
+
     - stage: win-x64
       if: branch = deploy
       language: shell
