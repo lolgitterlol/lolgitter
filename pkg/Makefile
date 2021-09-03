@@ -1,8 +1,8 @@
-# To create a release
+# To create a release//
 #   1. modify version on line 3 of package.json
 #   2. npm run package 			# Creates pkg/*.tgz files with needed binaries from previous release
 #   3. npm run test-packages	# Tests packages on locally running VMs
-#   4. npm run release         	# Tags release on github
+#   4. npm run release         	# Tags release on github..
 
 # If a new version of node or python is needed ...
 #   Need statically compiled node and python. See bottom of Makefile.
@@ -43,6 +43,7 @@ packages:
 	make package OS=darwin-x64 VERSION=$(VERSION)
 	make package OS=linux-x64 VERSION=$(VERSION)
 	make package OS=linux-armv7l VERSION=$(VERSION)
+	make package OS=win-x64 VERSION=$(VERSION)
 
 GITHUB=https://github.com/hapi-server/server-nodejs/releases/download
 package:
@@ -50,6 +51,13 @@ package:
 	#Do this if compiled binaries change.
 	#cp bin/node-$(NODEV)-$(OS) dist/hapi-server-$(VERSION)/bin/node
 ifeq ($(OS),win-x64)
+	cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-linux-x64.tgz
+	cd /tmp; tar zxf hapi-server-v0.9.5-linux-x64.tgz
+	cd /tmp; curl https://nodejs.org/dist/latest-v8.x/win-x64/node.exe --output node.exe
+	mv /tmp/node.exe dist/hapi-server-$(VERSION)/bin
+	mv /tmp/hapi-server-v0.9.5/bin/python dist/hapi-server-$(VERSION)/bin
+	rm -f /tmp/hapi-server-v0.9.5-linux-x64.tgz
+
 	# Not tested
 else
 	# Use comiled binaries from a previous release
@@ -69,23 +77,26 @@ endif
 files:
 	rm -rf dist/hapi-server-$(VERSION)
 	mkdir -p dist/hapi-server-$(VERSION)
-	rsync -aq \
+	pwd
+	rsync -a \
 		--exclude metadata/CAIO \
 		--exclude pkg \
 		--exclude .git \
 		--exclude public/data/QinDenton \
 		../ dist/hapi-server-$(VERSION)
+	cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
 	rm -rf dist/hapi-server-$(VERSION)/package*
 	rm -rf dist/hapi-server-$(VERSION)/.git*
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
+	cd dist/hapi-server-$(VERSION)/node_modules/ && ls -l
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
 
 targz:
-	cd dist; tar zcf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
+	cd dist; ls -l ;tar zcf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
 
 docker:
 	- docker stop hapi-server

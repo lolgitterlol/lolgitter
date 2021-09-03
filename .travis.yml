@@ -1,61 +1,97 @@
-language: generic
-os: linux
-dist: xenial
+env:
+  global:
+    - npm_ver=v`cat package.json | grep version | head -1 | sed 's/^.*[^0-9]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/'`
+
+before_install:
+  - npm install
+  - npm cache clean --force
+
+script:
+  - npm test
 
 jobs:
   include:
     - os: linux
+      if: branch = master
       language: node_js
       node_js: "6.16"
+      python: "2.7"
       branches:
          only: master
 
     - os: windows
+      if: branch = master
       language: node_js
       node_js: "8.11.3"
+      python: "2.7"
       branches:
         only: master
 
     - os: osx
+      if: branch = master
       language: node_js
       node_js: "6.16"
+      python: "2.7"
       branches:
         only: master
 
     - stage: deploy
-      os: osx
+      if: branch = deploy
+      os: linux
       language: generic
       before_install: skip
       script: skip
-
       branches:
         only:
           deploy
 
       before_deploy:
-        - git config --local user.name "srikar45"
-        - git config --local user.email "srikarreddygit@gmail.com"
-        - cd pkg && make update VERSION=`node -p "require('../package.json').version"`
-        - export TRAVIS_TAG=`node -p "require('../package.json').version"`
-        - git tag `node -p "require('../package.json').version"`"
+        - git config --local user.name "lolgitterlol"
+        - git config --local user.email "lolgitterlol@gmail.com"
+        - npm i
+        - npm run package
+        - export TRAVIS_TAG=$npm_ver
+        - git tag $npm_ver
 
       deploy:
         provider: releases
         on:
-          branch: releases
-        token: $GITHUB_OAUTH_TOKEN
+          branch: deploy
+        api_key: $GITHUB_OAUTH_TOKEN
         file_glob: true
-        file: dist/*
+        file: pkg/dist/*
+        skip_cleanup: true
 
-    - stage: test-linux
-      os: linux
+
+    # - stage: darwin-x64
+    #   if: branch = deploy
+    #   os: osx
+    #   language: generic
+    #   before_install: skip
+    #   branches:
+    #     only:
+    #       - deploy
+    #   script: curl -O -L https://github.com/lolgitterlol/lolgitter/releases/download/$npm_ver/hapi-server-$npm_ver-darwin-x64.tgz && tar zxf hapi-server-$npm_ver-darwin-x64.tgz && cd hapi-server-$npm_ver && bin/node server.js test/server-test.js --test
+    #
+    # - stage: win-x64
+    #   if: branch = deploy
+    #   language: shell
+    #   os: windows
+    #   before_install: skip
+    #   branches:
+    #     only:
+    #       - deploy
+    #   script: curl -O -L https://github.com/lolgitterlol/lolgitter/releases/download/$npm_ver/hapi-server-$npm_ver-win-x64.zip; unzip -q hapi-server-$npm_ver-win-x64.zip; cd hapi-server-$npm_ver; bin/node server.js test/server-test.js --test
+
+    - stage: linux-x64
+      if: branch = deploy
+      os: osx
       language: generic
       before_install: skip
-
       branches:
         only:
           - deploy
-      script: curl -O https://github.com/gitsrikarreddy/server-node-1/releases/download/`node -p "require('./package.json').version"`/hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; tar zxvf hapi-server-`node -p "require('./package.json').version"`-darwin-x64.tgz; cd hapi-server-`node -p "require('./package.json').version"`; ./hapi-server test
+      script: curl -O -L https://github.com/lolgitterlol/lolgitter/releases/download/$npm_ver/hapi-server-$npm_ver-linux-x64.tgz && tar zxf hapi-server-$npm_ver-linux-x64.tgz && cd hapi-server-$npm_ver && node server.js test/server-test.js --test
 
 before_install:
   - npm i
